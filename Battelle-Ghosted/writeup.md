@@ -1,4 +1,4 @@
-This repository contains my solution to the challenge found here, courtesy of Battelle.
+This repository contains my solution to the challenge found [here](https://solvers.battelle.org/cyber-challenge/ghosted), courtesy of Battelle.
 # Introduction
 
 This challenge was my first one, and I had a lot of fun completing it. I'm looking forward to doing more challenges when I have more free time!
