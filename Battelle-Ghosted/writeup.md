@@ -14,10 +14,10 @@ To understand the problem better, I ran the nc ctf.battelle.org 30040 command gi
 ![before](resources/before.png)
 
 My next step was to analyze the application using Ghidra. Fortunately, the application wasn't obfuscated, so I could quickly examine all of its functions. I'll briefly explain each option I found:\
-[4] - This option allows filing a complaint, but it simply "files" it in a /dev/null folder. I decided to ignore this method as it doesn't seem relevant.\
-[3] - This option is more interesting. It contains the "print_flag" method, which compares the "current_itinerary" with another "itinerary" variable. I'll provide more details on this later.\
 [1] - This option simply prints the current itinerary.\
-[2] - This is the option where most of the work is done. At first glance, it doesn't seem to reveal much. However, I noticed a variable (local_138) with a buffer of size 32, which will become important later.
+[2] - This is the option where most of the work is done. At first glance, it doesn't seem to reveal much. However, I noticed a variable (local_138) with a buffer of size 32(shown below), which will become important later.\
+[3] - This option is more interesting. It contains the "print_flag" method, which compares the "current_itinerary" with another "itinerary" variable. I'll provide more details on this later.\
+[4] - This option allows filing a complaint, but it simply "files" it in a /dev/null folder. I decided to ignore this method as it doesn't seem relevant.\
 
 ![scheduleFlight](resources/scheduleFlight.png)
 
@@ -29,7 +29,7 @@ Moving on to the "fly home" function, I dug deeper to find out what our itinerar
 
 ![neededItinerary](resources/neededItinerary.png)
 
-Armed with this knowledge, we have everything we need to find the flag. We just need to overflow the scheduled flight with 32 characters followed by "|1.<location>|" for all 5 locations.
+Armed with this knowledge, we have everything we need to find the flag. We just need to overflow the scheduled flight with 32 characters followed by "|\<#\>.\<location\>|" for all 5 locations.
 
 Once the flights are added, we can fly home and receive a nice little flag. Thank you, Ghost Airlines! :)
 
