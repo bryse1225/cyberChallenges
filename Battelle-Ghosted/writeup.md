@@ -17,11 +17,11 @@ My next step was to analyze the application using Ghidra. Fortunately, the appli
 [1] - This option simply prints the current itinerary.\
 [2] - This is the option where most of the work is done. At first glance, it doesn't seem to reveal much. However, I noticed a variable (local_138) with a buffer of size 32(shown below), which will become important later.\
 [3] - This option is more interesting. It contains the "print_flag" method, which compares the "current_itinerary" with another "itinerary" variable. I'll provide more details on this later.\
-[4] - This option allows filing a complaint, but it simply "files" it in a /dev/null folder. I decided to ignore this method as it doesn't seem relevant.\
+[4] - This option allows filing a complaint, but it simply "files" it in a /dev/null folder. I decided to ignore this method as it doesn't seem relevant.
 
 ![scheduleFlight](resources/scheduleFlight.png)
 
-Since it appeared that none of our flights were being added to the itinerary, I decided to try breaking the current logic by overflowing the buffer. I successfully tested this by inputting 32 "1s" as an overflow and 3 "B"s (what I hoped to get added).
+Since it appeared that none of our flights were being added to the itinerary, I decided to try breaking the current logic by overflowing the buffer. I successfully tested this by inputting 32 "1"s as an overflow and 3 "B"s (what I hoped to get added).
 
 ![after](resources/after.png)
 
