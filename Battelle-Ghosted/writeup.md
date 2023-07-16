@@ -7,7 +7,7 @@ This challenge was my first one, and I had a lot of fun completing it. I'm looki
 
 The challenge involves scheduling a flight back home on "Ghost Airlines" using their chatbot. However, the chatbot doesn't seem to be working as expected. We are provided with a .zip file and a Netcat command to a CTF server to work with.
 
-# Solution Steps
+# Solution
 
 To understand the problem better, I ran the nc ctf.battelle.org 30040 command given to us. Unfortunately, the tool was not helpful at all. Whenever I tried to schedule a flight, a message popped up saying it was canceled. Additionally, when attempting to fly home, the application seemed to exit at that point.
 
