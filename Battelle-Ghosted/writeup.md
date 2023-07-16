@@ -11,7 +11,7 @@ The challenge involves scheduling a flight back home on "Ghost Airlines" using t
 
 To understand the problem better, I ran the nc ctf.battelle.org 30040 command given to us. Unfortunately, the tool was not helpful at all. Whenever I tried to schedule a flight, a message popped up saying it was canceled. Additionally, when attempting to fly home, the application seemed to exit at that point.
 
-![before](Battelle-Ghosted/resources/before.png)
+![before](resources/before.png)
 
 My next step was to analyze the application using Ghidra. Fortunately, the application wasn't obfuscated, so I could quickly examine all of its functions. I'll briefly explain each option I found:\
 [4] - This option allows filing a complaint, but it simply "files" it in a /dev/null folder. I decided to ignore this method as it doesn't seem relevant.\
@@ -19,18 +19,18 @@ My next step was to analyze the application using Ghidra. Fortunately, the appli
 [1] - This option simply prints the current itinerary.\
 [2] - This is the option where most of the work is done. At first glance, it doesn't seem to reveal much. However, I noticed a variable (local_138) with a buffer of size 32, which will become important later.
 
-![scheduleFlight](scheduleFlight.png)
+![scheduleFlight](resources/scheduleFlight.png)
 
 Since it appeared that none of our flights were being added to the itinerary, I decided to try breaking the current logic by overflowing the buffer. I successfully tested this by inputting 32 "1s" as an overflow and 3 "B"s (what I hoped to get added).
 
-![after](after.png)
+![after](resources/after.png)
 
 Moving on to the "fly home" function, I dug deeper to find out what our itinerary needed to be. After some investigation, I discovered that the itinerary should include these 5 locations.
 
-![neededItinerary](neededItinerary.png)
+![neededItinerary](resources/neededItinerary.png)
 
 Armed with this knowledge, we have everything we need to find the flag. We just need to overflow the scheduled flight with 32 characters followed by "|1.<location>|" for all 5 locations.
 
 Once the flights are added, we can fly home and receive a nice little flag. Thank you, Ghost Airlines! :)
 
-![finalFlag](finalFlag.png)
+![finalFlag](resources/finalFlag.png)
